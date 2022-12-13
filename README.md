@@ -6,7 +6,8 @@ Collapsible Stateful Sidebar
 Features
 --------
 
-- Using cookie to remember status of the sidebar (hidden or not)
+- collapsable sidebar
+- Using local storage to remember status of the sidebar for each page
 
 Solution is based on <https://www.redmine.org/issues/21808#note-27>. If this is part of Redmine, this plugin will be deprecated.
 
