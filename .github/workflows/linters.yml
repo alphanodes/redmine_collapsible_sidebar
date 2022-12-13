@@ -1,0 +1,42 @@
+name: Run Linters
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Setup Gemfile
+      run: |
+        cp test/support/Gemfile.local Gemfile
+
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.6
+        bundler-cache: true
+
+    - name: Setup gems
+      run: |
+        bundle install --jobs 4 --retry 3
+
+    - name: Run RuboCop
+      run: |
+        bundle exec rubocop -S
+
+    - name: Setup node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - run: yarn install
+
+    - name: Run Stylelint
+      run: node_modules/.bin/stylelint assets/stylesheets/
+
+    - name: Run ESLint
+      run: node_modules/.bin/eslint assets/javascripts/
