@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
 
     - name: Setup Gemfile
       run: |
@@ -17,7 +17,7 @@ jobs:
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.6
+        ruby-version: 3.2
         bundler-cache: true
 
     - name: Setup gems
@@ -29,9 +29,9 @@ jobs:
         bundle exec rubocop -S
 
     - name: Setup node
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
-        node-version: '16'
+        node-version: '18'
 
     - run: yarn install
 
